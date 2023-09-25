@@ -42,8 +42,13 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 <p>5. In DC-1, go back to the 'mainframe' record. Click to open the A-record. In the IP address line, change the number to "8.8.8.8". On Client-1, in a Command Prompt, type "ping mainframe". You will notice that the ping is successful eeven though the IP address has been chaged. The reason for this is because the DNS record on Client-1 has not been updated to reflect the new IP address.<br /></p>
 <img src="https://github.com/GaryKirk/azure-network-protocols/assets/137613637/903c94de-b282-4bfa-8b1e-eaa08af65cc3"/><br /><br />
 
-<p>6. On Client-1, open a Command Prompt as an Administrator. Type "ipconfig /flushdns". After this, type "ipconfig /displaydns". You will notice that the record is now empty. Now type "ping mainframe". The ping should be successful show the connection to 8.8.8.8. Type "ipconfig /displaydns". You will notice that the records now is updated to mainframe at aIP address 8.8.8.8. <br /></p>
+<p>6. On Client-1, open a Command Prompt as an Administrator. Type "ipconfig /flushdns". After this, type "ipconfig /displaydns". You will notice that the record is now empty. Now type "ping mainframe". The ping should be successful show the connection to 8.8.8.8. Type "ipconfig /displaydns". You will notice that the records now is updated to mainframe at IP address 8.8.8.8. <br /></p>
 <img src="https://github.com/GaryKirk/azure-network-protocols/assets/137613637/56f6dbc8-e0fd-45e9-abeb-587a4a3893d8"/><br /><br />
 
-<p> <br /></p>
-<img src=""/><br /><br />
+<p>7. In a Client-1 Commpand Prompt, type "ping search". You will notice that there is no record of search. In Dc-1, go to Server Manager, undr 'mainframe', right-click and click to creata a 'New Alias (CNAME)'. Name this "search: and under 'Fully qualified domain name', type "www.google.com". Click to create this record.<br /></p>
+<img src="https://github.com/GaryKirk/azure-network-protocols/assets/137613637/a4cfce6b-0ba5-4f8f-a772-ec4e423ac7e3"/><br /><br />
+
+<p>8. In Client-1, open a web browser and type "search.mydomain.com". You will notice that the browser will try to load Google but the connection is unsuccessful. The reason for this is becuase Google's SSL certificate doesn't recognize search.mydomain.com as a valid match. Open Command Prompt and type "ipconfig /flushdns". After this, type "ping search" and then "ipconfig /displaydns". You will notice that search connects to Google, which then connects to a correct Google IP address.<br /></p>
+<img src="https://github.com/GaryKirk/azure-network-protocols/assets/137613637/5df5c37d-44f9-4e15-812a-530dea322a0d"/><br /><br />
+
+
