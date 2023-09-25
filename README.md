@@ -36,3 +36,14 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 <p>3. Next, connect to Client-1, open a Command Prompt, and type "ping mainframe". You will see that the ping is now successful becuase you created the A-record in DC-1.<br /></p>
 <img src="https://github.com/GaryKirk/azure-network-protocols/assets/137613637/f579a017-21a7-4ff6-9d92-eba70016e571"/><br /><br />
 
+<p>4. In the same Command Prompt, now type "ipconfig /displaydns". Scroll through the records to find the 'mainframe' record. You will notice that 'dc-1.mainframe.com' is now saved in the local cache. This means that the next time you visit 'mainframe', your system will use this record rather than going to the DNS server. <br /></p>
+<img src="https://github.com/GaryKirk/azure-network-protocols/assets/137613637/da25ad84-84da-4550-abc4-709cb6980e99"/><br /><br />
+
+<p>5. In DC-1, go back to the 'mainframe' record. Click to open the A-record. In the IP address line, change the number to "8.8.8.8". On Client-1, in a Command Prompt, type "ping mainframe". You will notice that the ping is successful eeven though the IP address has been chaged. The reason for this is because the DNS record on Client-1 has not been updated to reflect the new IP address.<br /></p>
+<img src="https://github.com/GaryKirk/azure-network-protocols/assets/137613637/903c94de-b282-4bfa-8b1e-eaa08af65cc3"/><br /><br />
+
+<p>6. On Client-1, open a Command Prompt as an Administrator. Type "ipconfig /flushdns". After this, type "ipconfig /displaydns". You will notice that the record is now empty. Now type "ping mainframe". The ping should be successful show the connection to 8.8.8.8. Type "ipconfig /displaydns". You will notice that the records now is updated to mainframe at aIP address 8.8.8.8. <br /></p>
+<img src="https://github.com/GaryKirk/azure-network-protocols/assets/137613637/56f6dbc8-e0fd-45e9-abeb-587a4a3893d8"/><br /><br />
+
+<p> <br /></p>
+<img src=""/><br /><br />
